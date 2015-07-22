@@ -1,0 +1,18 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.axelspringer.ideas.pcp.misc.recruiting</groupId>
+    <artifactId>recruiting-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>task001-maven</module>
+        <module>task002-testing-sort</module>
+        <module>task003-spring-basics</module>
+        <module>task004-tdd-stringcompress</module>
+        <module>task005-mockito</module>
+        <module>task006-http-service</module>
+        <module>task007-frontend</module>
+        <module>task008-generics-and-reflection</module>
+    </modules>
+</project>
