@@ -1,3 +1,8 @@
+Please work on as much as you can in affordable time.
+You can get the solution for a task if you want to continue working on a following task.
+Please rather deliver less in high quality than more in lesser quality.
+Have fun!
+
 Task 001 - maven
 
     * Create a maven or gradle based Java-Project in your favourite IDE.
