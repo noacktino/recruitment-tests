@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * This class is a POJO container which is used to transfer the data. This class
  * is minor documented since it only contains getter and setter methods.
@@ -11,6 +13,7 @@ import java.util.UUID;
  * @author Tino
  *
  */
+@XmlRootElement
 public class NewsPojo {
 	
 	private UUID id;

@@ -10,6 +10,10 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.asideas.recruitmenttests.newsapp.NewsApplication</param-value>
         </init-param>
+		<init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>com.asideas.recruitmenttests.newsapp.NewsRequestFilter</param-value>
+        </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<!-- Use the following URL in a web browser: http://localhost:8080/openinfra_backend/rest/projects -->
