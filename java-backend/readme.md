@@ -15,19 +15,21 @@ the ACCEPT header or to use the 'dot-notation' e.g.: .json + .xml.
 A browser or curl can be used to interact with the News Application like so:
 
 1. GET:
-- curl -i -H "Accept:application/json" http://localhost:8080/recruitment-tests/rest/v1/news
-- curl -i http://localhost:8080/recruitment-tests/rest/v1/news.json
+	- curl -i -H "Accept:application/json" http://localhost:8080/recruitment-tests/rest/v1/news
+	- curl -i http://localhost:8080/recruitment-tests/rest/v1/news.json
 
 2. POST:
-- curl -i -H "Content-Type: application/xml" -X POST -d @news.xml http://localhost:8080/recruitment-tests/rest/v1/news
-- curl -i -H "Content-Type: application/json" -X POST -d @news.json http://localhost:8080/recruitment-tests/rest/v1/news
+	- curl -i -H "Content-Type: application/xml" -X POST -d @news.xml http://localhost:8080/recruitment-tests/rest/v1/news
+	- curl -i -H "Content-Type: application/json" -X POST -d @news.json http://localhost:8080/recruitment-tests/rest/v1/news
 
 3. PUT:
-- curl -i -H "Content-Type: application/xml" -X PUT -d @put.xml http://localhost:8080/recruitment-tests/rest/v1/news/5731d173-063f-4921-99dd-9e417d64171a
+	- curl -i -H "Content-Type: application/xml" -X PUT -d @put.xml http://localhost:8080/recruitment-tests/rest/v1/news/5731d173-063f-4921-99dd-9e417d64171a
 
 4. DELETE:
-- curl -i -X DELETE http://localhost:8080/recruitment-tests/rest/v1/news/071c74c2-1885-4739-8690-af9907afb977
+	- curl -i -X DELETE http://localhost:8080/recruitment-tests/rest/v1/news/071c74c2-1885-4739-8690-af9907afb977
 
-
-In order to keep is stupid and simple, parameters are mutually exclusive and weighted as follows: author beats 
-	 * everything, keyword beats period and period beats empty parameter.
+The 'news'-resource allows some parameters. In order to keep is stupid and simple, parameters are mutually exclusive and weighted as follows: author beats everything, keyword beats period and period beats empty parameter e.g.:
+	- http://localhost:8080/recruitment-tests/rest/v1/news?author=
+	- http://localhost:8080/recruitment-tests/rest/v1/news?keyword=
+	- http://localhost:8080/recruitment-tests/rest/v1/news?period=
+	- http://localhost:8080/recruitment-tests/rest/v1/news
