@@ -1,3 +1,4 @@
+## Part 2: Coding
 The conding part has been implmented by means of Eclipse within a Maven project.
 The basis of the RESTful API is the Jersey framework.
 
@@ -26,3 +27,7 @@ curl -i -H "Content-Type: application/xml" -X PUT -d @put.xml http://localhost:8
 
 DELETE:
 curl -i -X DELETE http://localhost:8080/recruitment-tests/rest/v1/news/071c74c2-1885-4739-8690-af9907afb977
+
+
+In order to keep is stupid and simple, parameters are mutually exclusive and weighted as follows: author beats 
+	 * everything, keyword beats period and period beats empty parameter.
