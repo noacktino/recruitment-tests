@@ -29,6 +29,7 @@ A browser or curl can be used to interact with the News Application like so:
 	- curl -i -X DELETE http://localhost:8080/recruitment-tests/rest/v1/news/071c74c2-1885-4739-8690-af9907afb977
 
 The 'news'-resource allows some parameters. In order to keep is stupid and simple, parameters are mutually exclusive and weighted as follows: author beats everything, keyword beats period and period beats empty parameter e.g.:
+
 	- http://localhost:8080/recruitment-tests/rest/v1/news?author=
 	- http://localhost:8080/recruitment-tests/rest/v1/news?keyword=
 	- http://localhost:8080/recruitment-tests/rest/v1/news?period=
