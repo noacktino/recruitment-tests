@@ -19,12 +19,8 @@ import javax.ws.rs.core.MediaType;
  * '.json'. This helps to keep the REST API straight and consistent while the
  * URI extension can be additionally provided.
  * 
- * There still exists another filter which is used to remove trailing slashes
- * from the URI. This filter is still necessary since it is executed before this
- * filter and directly redirects (including URL rewriting) to the origin URI. 
- * This behavior cannot be achieved here.
  * 
- * @author <a href="http://www.b-tu.de">BTU</a> DBIS
+ * @author Tino
  *
  */
 @PreMatching

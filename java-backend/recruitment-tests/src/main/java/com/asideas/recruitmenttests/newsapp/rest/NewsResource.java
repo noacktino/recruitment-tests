@@ -22,7 +22,7 @@ import com.asideas.recruitmenttests.newsapp.pojo.NewsPojo;
 /**
  * This class is used to provide the RESTful resources. Each resource is 
  * specified by a unique path. The path entails a version number which helps
- * to provide evolving implementation over time.
+ * to provide evolving implementation over time. XML and JSON are provided.
  * 
  * @author <a href="http://www.b-tu.de">BTU</a> DBIS
  *
@@ -98,7 +98,7 @@ public class NewsResource {
 	
 	/**
 	 * This method is used to update an existing resource. Partial updates are
-	 * not allowed. The resource id shold match the object id.
+	 * not allowed. The resource id should match the object id.
 	 * 
 	 * @param id the resource id
 	 * @param pojo the specific news entry object

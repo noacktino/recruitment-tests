@@ -1,5 +1,5 @@
 /**
- * This package contains database access object.
+ * This package contains the database which provides some access functionality.
  * 
  * @author Tino
  *
