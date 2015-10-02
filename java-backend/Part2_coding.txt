@@ -1,0 +1,3 @@
+The conding part has been implmented by means of an Eclipse project. 
+The basis of the RESTful API is the Jersey framework.
+Curl can be used to interact with the News Application like so:
