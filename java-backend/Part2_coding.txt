@@ -1,8 +1,10 @@
 The conding part has been implmented by means of an Eclipse project. 
 The basis of the RESTful API is the Jersey framework.
-The RESTful API is fully documented under the following resoure http://localhost:8080/recruitment-tests/rest/application.wadl
-Curl can be used to interact with the News Application like so:
 
+The RESTful API is fully documented under the following resoure:
+http://localhost:8080/recruitment-tests/rest/application.wadl
+
+Curl can be used to interact with the News Application like so:
 GET:
 curl -i -H "Accept:application/json" http://localhost:8080/recruitment-tests/rest/v1/news
 or
