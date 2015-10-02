@@ -7,7 +7,8 @@ http://localhost:8080/recruitment-tests/rest/application.wadl
 Simple JUnit tests have been implemented using the integrated Jersey Test Framework which are automatically
 executed via the Maven build process.
 
-The application provides both JSON and XML formats. To switch between both formats it's possible to change the ACCEPT header or to use the 'dot-notation' e.g.: .json + .xml.
+The application provides both JSON and XML formats. To switch between both formats it's possible to change 
+the ACCEPT header or to use the 'dot-notation' e.g.: .json + .xml.
 
 A browser or curl can be used to interact with the News Application like so:
 GET:
