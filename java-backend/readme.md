@@ -13,6 +13,7 @@ The application provides both JSON and XML formats. To switch between both forma
 the ACCEPT header or to use the 'dot-notation' e.g.: .json + .xml.
 
 A browser or curl can be used to interact with the News Application like so:
+
 1. GET:
 - curl -i -H "Accept:application/json" http://localhost:8080/recruitment-tests/rest/v1/news
 - curl -i http://localhost:8080/recruitment-tests/rest/v1/news.json
