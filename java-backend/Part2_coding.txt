@@ -1,8 +1,11 @@
-The conding part has been implmented by means of an Eclipse project. 
+The conding part has been implmented by means of an Eclipse project within a Maven build process.
 The basis of the RESTful API is the Jersey framework.
 
 The RESTful API is fully documented under the following resoure:
 http://localhost:8080/recruitment-tests/rest/application.wadl
+
+Simple JUnit tests have been implemented using the integrated Jersey Test Framework which are automatically
+executed via Maven.
 
 Curl can be used to interact with the News Application like so:
 GET:
