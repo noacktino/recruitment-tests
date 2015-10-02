@@ -8,6 +8,8 @@
  *  Additionally, the application provides both JSON and XML formats. To switch
  *  between both formats it's possible to change the ACCEPT header or to use
  *  the 'dot-notation' e.g. .json + .xml.
+ *  
+ *  @see NewsRequestFilter
  * 
  * @author Tino
  *

@@ -1,6 +1,7 @@
 package com.asideas.recruitmenttests.newsapp.db;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.ws.rs.WebApplicationException;
 
 import com.asideas.recruitmenttests.newsapp.pojo.NewsPojo;
 
@@ -24,6 +27,7 @@ public class NewsDatabase {
 	 * The database simulated by a map.
 	 */
 	private static Map<UUID, NewsPojo> database = new HashMap<UUID, NewsPojo>();
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	// Insert initial content to the database.
 	static {
@@ -54,7 +58,11 @@ public class NewsDatabase {
 		Set<String> authors = new HashSet<String>();
 		authors.add("Jonathan Marcus");
 		news1.setAuthors(authors);
-		news1.setPublishDate(Calendar.getInstance().getTime());
+		try {
+			news1.setPublishDate(sdf.parse("2015-09-30"));
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		Set<String> keyWords = new HashSet<String>();
 		keyWords.add("Syria conflict");
 		keyWords.add("Russia");
@@ -95,13 +103,59 @@ public class NewsDatabase {
 		authors = new HashSet<String>();
 		authors.add("Armin Mahler");
 		news2.setAuthors(authors);
-		news2.setPublishDate(Calendar.getInstance().getTime());
+		try {
+			news2.setPublishDate(sdf.parse("2015-10-01"));
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		keyWords = new HashSet<String>();
 		keyWords.add("VW Scandal");
 		keyWords.add("Made in Germany");
 		keyWords.add("Martin Winterkorn");
 		news2.setKeywords(keyWords);
 		database.put(news2.getId(), news2);
+		
+		NewsPojo news3 = new NewsPojo();
+		news3.setId(UUID.fromString("5731d173-063f-4921-99dd-9e417d64171a"));
+		news3.setHeader("Gunman kills at least 9 in latest US school shooting");
+		news3.setShortDescription("Oregon college gunman named as 26-year-old "
+				+ "Chris Harper-Mercer. At least 10 people were killed - "
+				+ "the gunman among them - and many injured. \'Thoughts and "
+				+ "prayers are not enough,\' says Obama after 9 killed in "
+				+ "college shooting.");
+		news3.setText("Law enforcement officials have identified the man "
+				+ "suspected of opening fire at a community college in Oregon "
+				+ "as Chris Harper Mercer, and said he had three weapons, at "
+				+ "least one of them a long gun and the other ones handguns. "
+				+ "It was not clear whether he fired them all, local media "
+				+ "said. The officials said the man lived in the Roseburg "
+				+ "area, the New York Times reported. Police said the shooter "
+				+ "was killed in an exchange of fire with police. They said "
+				+ "one witness told them that he asked about people’s "
+				+ "religions before he began firing. He appears to be an "
+				+ "angry young man who was very filled with hate,” one law "
+				+ "enforcement official said. The 26-year-old demanded that "
+				+ "his victims lay on the ground and then made them stand "
+				+ "up one at a time and state their religion before opening "
+				+ "fire according to one traumatised eyewitness. Kortney Moore "
+				+ "said she was in her writing class when a bullet went "
+				+ "through the window hitting her teacher in the head. Soon "
+				+ "after, the shooter was inside the room demanding to know "
+				+ "the religion of her fellow students.");
+		authors = new HashSet<String>();
+		authors.add("Andrew Buncombe");
+		news3.setAuthors(authors);
+		try {
+			news3.setPublishDate(sdf.parse("2015-10-02"));
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		keyWords = new HashSet<String>();
+		keyWords.add("Oregon");
+		keyWords.add("gunman");
+		keyWords.add("school shooting");
+		news3.setKeywords(keyWords);
+		database.put(news3.getId(), news3);
 	}
 	
 	/**
@@ -121,6 +175,75 @@ public class NewsDatabase {
 	 */
 	public synchronized static List<NewsPojo> read() {
 		return new LinkedList<NewsPojo>(database.values());
+	}
+	
+	/**
+	 * This method returns all news entries for a given author.
+	 * 
+	 * @param author the requested author
+	 * @return a list of all news entries of this author
+	 */
+	public synchronized static List<NewsPojo> readByAuthor(String author) {
+		List<NewsPojo> entries = new LinkedList<NewsPojo>();
+		for(NewsPojo pojo : new LinkedList<NewsPojo>(database.values())) {
+			for(String s : pojo.getAuthors()) {
+				if(s.equalsIgnoreCase(author)) {
+					entries.add(pojo);
+				}
+			}
+		}
+		return entries;
+	}
+	
+	/**
+	 * This method returns all news entries regarding to a period. An entry is
+	 * returned when the current date matches the start or end dates and when
+	 * it lies in between start and end dates. Period string in data format 
+	 * 'yyyy-MM-dd_yyy-MM-dd'. Start and end date must be separated by an 
+	 * underscore. Period string should start with 'start date' and should end 
+	 * with 'end date'.
+	 * 
+	 * @param period the period as string separated by an underscore
+	 * @return a list of news entries
+	 */
+	public synchronized static List<NewsPojo> readByPeriod(String period) {
+		String[] p = period.split("_");
+		Date start = null;
+		Date end = null;
+		try {
+			start = sdf.parse(p[0]);
+			end = sdf.parse(p[1]);			
+		} catch(Exception ex) {
+			throw new WebApplicationException(409);
+		}
+		List<NewsPojo> entries = new LinkedList<NewsPojo>();
+		for(NewsPojo pojo : new LinkedList<NewsPojo>(database.values())) {
+			if(pojo.getPublishDate().compareTo(start) == 0  || 
+					pojo.getPublishDate().compareTo(end) == 0 || 
+					(pojo.getPublishDate().after(start) && 
+							pojo.getPublishDate().before(end))) {
+				entries.add(pojo);
+			}
+		}
+		return entries;		
+	}
+	
+	/**
+	 * This method returns all news entries for a given keyword.
+	 * 
+	 * @param keyword the requested keyword
+	 * @return a list of all news entries regarding this keyword
+	 */
+	public synchronized static List<NewsPojo> readByKeyword(String keyword) {
+		List<NewsPojo> entries = new LinkedList<NewsPojo>();
+		for(NewsPojo pojo : new LinkedList<NewsPojo>(database.values())) {
+			for(String s : pojo.getKeywords()) {
+				if(s.toLowerCase().contains(keyword.toLowerCase())) {
+					entries.add(pojo);
+				}
+			}
+		}
+		return entries;
 	}
 	
 	/**

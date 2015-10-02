@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,15 +30,36 @@ import com.asideas.recruitmenttests.newsapp.pojo.NewsPojo;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class NewsResource {
-	
+
 	/**
-	 * This method retrieves all available news entries.
+	 * This method retrieves a list of news entries. This method also provides
+	 * some optional parameters. In order to keep is stupid and simple, 
+	 * parameters are mutually exclusive and weighted as follows: author beats 
+	 * everything, keyword beats period and period beats empty parameter.
 	 * 
-	 * @return all available news entries.
+	 * When no parameter is set, this method retrieves a list of all available
+	 * news entries. 
+	 * 
+	 * @param author 
+	 * @param keyword
+	 * @param period
+	 * @return
 	 */
 	@GET
-	public List<NewsPojo> get() {
-		return NewsDatabase.read();
+	public List<NewsPojo> get(
+			@QueryParam("author") String author,
+			@QueryParam("keyword") String keyword,
+			@QueryParam("period") String period) {
+		
+		if(author != null && !author.isEmpty()) {
+			return NewsDatabase.readByAuthor(author);
+		} else if(keyword != null && !keyword.isEmpty()) {
+			return NewsDatabase.readByKeyword(keyword);
+		} else if(period != null && !period.isEmpty()) {
+			return NewsDatabase.readByPeriod(period);
+		} else {
+			return NewsDatabase.read();
+		}
 	}
 	
 	/**
