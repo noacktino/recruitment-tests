@@ -279,7 +279,8 @@ public class NewsDatabase {
 	public synchronized static boolean update(NewsPojo pojo) {
 		if(database.containsKey(pojo.getId())) {
 			database.remove(pojo.getId());
-			return database.put(pojo.getId(), pojo) != null;
+			database.put(pojo.getId(), pojo);
+			return true;
 		} else {
 			return false;
 		}

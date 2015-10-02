@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -84,6 +85,9 @@ public class NewsResource {
 	 */
 	@POST
 	public Response post(NewsPojo pojo) {
+		if(pojo == null) {
+			throw new WebApplicationException(500);
+		}
 		UUID id = NewsDatabase.insert(pojo);
 		if(id != null) {
 			return Response.ok(id).build();
@@ -107,11 +111,27 @@ public class NewsResource {
 			if(NewsDatabase.update(pojo)) {
 				return Response.ok().build();
 			} else {
-				throw new WebApplicationException(409);
+				throw new WebApplicationException(404);
 			}
 		} else {
 			throw new WebApplicationException(400);
 		}		
 	}
+	
+	/**
+	 * Deletes the current resource. 
+	 * 
+	 * @param id the resource id
+	 * @return status code
+	 */
+	@DELETE
+	@Path("{id}")
+	public Response delete(@PathParam("id") UUID id) {
+		if(NewsDatabase.delete(id)) {
+			return Response.ok().build();
+		} else {
+			throw new WebApplicationException(404);
+		}
+	}	
 
 }
