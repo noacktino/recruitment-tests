@@ -1,7 +1,7 @@
 ## Part 1: Writing
 
 1. I'm currently working on a project which refers to archeological research. The development team consists of two and a half developer positions. The focal point of this project is the implementation of an excavation system. It was intended to ship the implementation work to an external company. The company has resigned the contract after a while. From the beginning of the year 2015 we were obliged to implement the entire system from the scratch. I'm proud of the work we've done and the current implementation status. I'm proud of this because we reached our achievements although the project situation is very complex and difficult.
-2. 
+2. I would like to mention my doctoral thesis. It's a technical book about monitoring and data processing. I like this book because I wrote it by my own and it deals with data stream processing, data mining and anomaly detection. In my mind, data processing and mining are most important use cases in the future required over all application domains. This is the reason why you should read my book.
 
 ## Part 2: Coding
 
