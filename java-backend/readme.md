@@ -1,4 +1,5 @@
 ## Part 2: Coding
+
 The conding part has been implmented by means of Eclipse within a Maven project.
 The basis of the RESTful API is the Jersey framework.
 
@@ -13,19 +14,26 @@ the ACCEPT header or to use the 'dot-notation' e.g.: .json + .xml.
 
 A browser or curl can be used to interact with the News Application like so:
 GET:
+
 curl -i -H "Accept:application/json" http://localhost:8080/recruitment-tests/rest/v1/news
 or
+
 curl -i http://localhost:8080/recruitment-tests/rest/v1/news.json
 
 POST:
+
 curl -i -H "Content-Type: application/xml" -X POST -d @news.xml http://localhost:8080/recruitment-tests/rest/v1/news
+
 or
+
 curl -i -H "Content-Type: application/json" -X POST -d @news.json http://localhost:8080/recruitment-tests/rest/v1/news
 
 PUT:
+
 curl -i -H "Content-Type: application/xml" -X PUT -d @put.xml http://localhost:8080/recruitment-tests/rest/v1/news/5731d173-063f-4921-99dd-9e417d64171a
 
 DELETE:
+
 curl -i -X DELETE http://localhost:8080/recruitment-tests/rest/v1/news/071c74c2-1885-4739-8690-af9907afb977
 
 
